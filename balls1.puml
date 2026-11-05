@@ -1,0 +1,37 @@
+@startuml balls1
+
+
+skinparam ClassBackgroundColor Cyan|DarkGoldenRod
+skinparam ArrowColor MediumSpringGreen
+skinparam classFontName Comic Sans MS
+skinparam ArrowThickness 4
+skinparam backgroundColor PapayaWhip
+skinparam ClassBorderColor Crimson
+skinparam ClassBorderThickness 3
+skinparam ClassHeaderBackgroundColor Olive|Fuchsia
+skinparam ClassFontColor #CFFF04
+
+skinparam defaultFontName Comic Sans MS
+skinparam SequenceLifeLineBorderColor Crimson
+skinparam SequenceParticipantBorderColor Crimson
+skinparam SequenceParticipantBorderThickness 3
+skinparam SequenceParticipantBackgroundColor Cyan|DarkGoldenRod
+skinparam SequenceParticipantFontColor #CFFF04
+skinparam ActorBackgroundColor Cyan|DarkGoldenRod
+skinparam ActorBorderColor Crimson
+
+
+actor Server
+participant "ServerView" as SV
+participant "TableController" as TC
+participant "BillController" as BC
+
+Server -> SV: click "Create Bills"
+SV -> TC: make_bills(printer_window)
+create BC
+TC -> BC: new(view, restaurant, table, printer)
+TC -> SV: set_controller()
+TC -> SV: update()
+SV -> BC: create_ui()
+BC -> SV: create_bill_ui(table, bills)
+@enduml
